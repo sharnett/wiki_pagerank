@@ -7,20 +7,26 @@ Playing with the wikipedia link graph
 download files pagelinks.sql and page.sql
 
 ***cat pagelinks.sql | make_graph_mapper.py | sort | make_graph_reducer.py > graph.txt
+
 wc -l graph.txt
 
 ./create_compact_dicts.py
+
 cat page.sql | make_title-ID_dict.py
+
 ./make_ID-title_dict.py
 
 set n to value from wc above
+
 **./compactify_graph
 
 ipython
+
 top_k
 
 
 ** - takes maybe 20 minutes?
+
 *** - takes a really long time. might actually require mapreduce.
 
 
