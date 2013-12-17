@@ -1,10 +1,15 @@
 from cPickle import load
 from scipy.io import savemat
 from scipy.sparse import lil_matrix, csr_matrix
-
-def create_matrix(n = 0, test=True, A=None, sparse_to_dense=None):
+from os import system as run
+def create_matrix(n = 0, test=True, A=None, sparse_to_dense=False):
+    run('wc -l graph.txt > graph.txt.wc')
+    wcf = open('graph.txt.wc')
+    n = int(wcf.read().split(' ')[0])
+    wcf.close()
     #n = 26956134
-    n = 10807612
+    #n = 10807612
+    #n = 185314
     if not sparse_to_dense:
         print 'loading conversion dictionary...'
         sparse_to_dense = load(open('sparse_to_dense.pickle'))
@@ -18,9 +23,9 @@ def create_matrix(n = 0, test=True, A=None, sparse_to_dense=None):
         i = converted[0]
         for j in converted[1:]:
             if j>=0: A[i, j] = 1
-        if k%100000 == 0: print k
+        #if k%100000 == 0: print k
     return A
 
 if __name__ == '__main__':
     A = create_matrix(test=False)
-    dump('A', {'A': A})
+    savemat('A', {'A': A})

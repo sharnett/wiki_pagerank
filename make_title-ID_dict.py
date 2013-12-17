@@ -9,7 +9,7 @@ def process_line(line, d):
     for match in finditer(pattern, line):
         ID, namespace, name = match.groups()
         if namespace == '0': 
-            print ID, name
+            #print ID, name
             d[name] = ID
 
 def main():
