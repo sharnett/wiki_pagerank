@@ -24,10 +24,16 @@ I have included a file to download and extract this.
 Example Usage
 -------------------------------------
 
+sudo apt-get install python-scipy
+
+
 ./download_and_extract_tagalog_wikipedia_dump.sh
+
 ./test_getting_wikipedia_pageranks.sh
 
+
 This should get you something like this:
+
 
 loading conversion dictionary...
 allocating matrix...

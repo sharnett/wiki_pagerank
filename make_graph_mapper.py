@@ -31,7 +31,7 @@ def main():
     enwiki-YYYYMMDD-pagelinks.sql file. Needs the pickled dictionary mapping
     page names to IDs '''
     crap = 'INSERT INTO `pagelinks` VALUES'
-    path = '/home/luke/dev/wiki_stuff/wikipediaDumpReader-0.2.10/'
+    path = ''#set if needed (different current dir)
     pickle = 'title-ID_dict.pickle'
     d = load(open(path+pickle))
     for line in stdin:
