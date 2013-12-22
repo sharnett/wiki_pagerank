@@ -1,6 +1,12 @@
 wiki_pagerank
 =============
 
+##Some results
+
+* [top 100 english](https://gist.github.com/sharnett/8089331)
+* [full english results](https://ia601006.us.archive.org/27/items/en_wikipedia_article_titles_by_pagerank_dated_20131202.txt/en_wikipedia_article_titles_by_pagerank.txt) (209 MB file)
+* [top 100 tagalog](https://gist.github.com/sharnett/8089293)
+
 Sorting Wikipedia article dumps by PageRank
 -------------------------------------
 
