@@ -30,44 +30,38 @@ I have included a file to download and extract this.
 Example Usage
 -------------------------------------
 
-sudo apt-get install python-scipy
+    sudo apt-get install python-scipy
+    ./download_and_extract_tagalog_wikipedia_dump.sh
+    ./test_getting_wikipedia_pageranks.sh
 
+This should take a couple minutes and get you something like this:
 
-./download_and_extract_tagalog_wikipedia_dump.sh
-
-./test_getting_wikipedia_pageranks.sh
-
-
-This should get you something like this:
-
-
-loading conversion dictionary...
-allocating matrix...
-reading graph file...
-loading A
-doing pagerank
-i = 1 err = 1.001
-i = 2 err = 0.0721206085496
-i = 3 err = 0.0309899616446
-i = 4 err = 0.0180857531626
-i = 5 err = 0.00638996220934
-i = 6 err = 0.0030262687189
-i = 7 err = 0.00118320968906
-i = 8 err = 0.000542479816184
-loading denseID to sparseID dictionary
-loading ID to title dictionary
-sorting
-Wikipedia
-Malayang_software
-Wikang_Ingles
-Malayang_sopwer
-Hapon
-Estados_Unidos
-Pilipinas
-Ensiklopedya
-GNU/Linux
-World_Wide_Web
-
+    loading conversion dictionary...
+    allocating matrix...
+    reading graph file...
+    loading A
+    doing pagerank
+    i = 1 err = 1.001
+    i = 2 err = 0.0721206085496
+    i = 3 err = 0.0309899616446
+    i = 4 err = 0.0180857531626
+    i = 5 err = 0.00638996220934
+    i = 6 err = 0.0030262687189
+    i = 7 err = 0.00118320968906
+    i = 8 err = 0.000542479816184
+    loading denseID to sparseID dictionary
+    loading ID to title dictionary
+    sorting
+    Wikipedia
+    Malayang_software
+    Wikang_Ingles
+    Malayang_sopwer
+    Hapon
+    Estados_Unidos
+    Pilipinas
+    Ensiklopedya
+    GNU/Linux
+    World_Wide_Web
 
 -------------------------------------
 Background by Luke Stanley
