@@ -1,15 +1,10 @@
 from cPickle import load
 from scipy.io import savemat
 from scipy.sparse import lil_matrix, csr_matrix
-from os import system as run
+
 def create_matrix(n = 0, test=True, A=None, sparse_to_dense=False):
-    run('wc -l graph.txt > graph.txt.wc')
-    wcf = open('graph.txt.wc')
-    n = int(wcf.read().split(' ')[0])
-    wcf.close()
-    #n = 26956134
-    #n = 10807612
-    #n = 185314
+    for n,_ in enumerate(open('graph.txt'), 1):
+        pass
     if not sparse_to_dense:
         print 'loading conversion dictionary...'
         sparse_to_dense = load(open('sparse_to_dense.pickle'))
