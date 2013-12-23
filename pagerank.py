@@ -1,30 +1,46 @@
-from scipy.sparse import spdiags
+from scipy.io import loadmat
+from cPickle import load
 from numpy.linalg import norm
-from numpy import ones, divide
+from numpy import ones, divide, argsort, array
+from itertools import islice, count
 
-#def pagerank(M, d=.85, tol=1e-3):
 def pagerank(A, d=.85, tol=1e-3):
     n = A.shape[0]
     D = A.astype('i4').sum(1)
     D[D==0] = n
     At = A.transpose()
     v = ones((n,1))/n
-    err = tol+1
-    i = 1
-    print 'i =', i, 'err =', err
-    while err > tol:
+    for i in count(1):
         prev = v
         v = d*(At*divide(v, D)) + (1-d)/n
         err = norm(v-prev)
-        i += 1
         print 'i =', i, 'err =', err
+        if err < tol:
+            break
     return v
 
-def create_M(A):
-    ''' Not worth it. Better to use A directly '''
-    n = A.shape[0]
-    At = A.transpose()
-    x = At.astype('i4').sum(0)
-    x[x==0] = n
-    D = spdiags(1.0/x, 0, n, n)
-    return At*D
+def load_data():
+    print 'loading A'
+    A = loadmat('A.mat')['A']
+    print 'loading denseID to sparseID dictionary'
+    d2s = load(open('dense_to_sparse.pickle'))
+    print 'loading ID to title dictionary'
+    i2t = load(open('ID-title_dict.pickle'))
+    return A, d2s, i2t
+
+def top_k(k = 10, v = None):
+    A, d2s, i2t = load_data()
+    if v is None:
+        print 'doing pagerank'
+        v = pagerank(A)
+    print 'sorting'
+    t = reversed(argsort(array(v)[:,0])) # pageranked list of dense IDs
+    def get_title(x):
+        ''' convert dense ID to sparse ID, then sparse ID to title '''
+        i = d2s[x]
+        return i2t[str(i)]
+    return [get_title(x) for x in islice(t, k)]
+
+if __name__ == '__main__':
+    for i, title in enumerate(top_k(), 1):
+        print('%2d %s' % (i, title))

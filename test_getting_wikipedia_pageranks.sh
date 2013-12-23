@@ -9,4 +9,4 @@ cat pagelinks.sql | python make_graph_mapper.py | sort | python make_graph_reduc
 python create_compact_dicts.py
 python make_ID-title_dict.py
 python compactify_graph.py
-python test_top_pr.py
+python pagerank.py
