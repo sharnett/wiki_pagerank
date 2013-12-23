@@ -3,9 +3,8 @@ rm *.pyc
 rm *.mat
 rm *.pickle
 rm graph.txt
-cat page.sql | python make_title-ID_dict.py
+python make_title-ID_dicts.py
+echo "building the graph..."
 cat pagelinks.sql | python make_graph_mapper.py | sort | python make_graph_reducer.py > graph.txt
-python create_compact_dicts.py
-python make_ID-title_dict.py
-python compactify_graph.py
+python compactify.py
 python pagerank.py

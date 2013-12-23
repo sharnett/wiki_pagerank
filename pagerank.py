@@ -20,11 +20,9 @@ def pagerank(A, d=.85, tol=1e-3):
     return v
 
 def load_data():
-    print 'loading A'
+    print 'loading data...'
     A = loadmat('A.mat')['A']
-    print 'loading denseID to sparseID dictionary'
     d2s = load(open('dense_to_sparse.pickle'))
-    print 'loading ID to title dictionary'
     i2t = load(open('ID-title_dict.pickle'))
     return A, d2s, i2t
 
@@ -38,7 +36,8 @@ def top_k(k = 10, v = None):
     def get_title(x):
         ''' convert dense ID to sparse ID, then sparse ID to title '''
         i = d2s[x]
-        return i2t[str(i)]
+        return i2t[i]
+        #return i2t[str(i)]
     return [get_title(x) for x in islice(t, k)]
 
 if __name__ == '__main__':
