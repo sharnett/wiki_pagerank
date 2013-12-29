@@ -12,6 +12,7 @@ def process_line(line, d):
 
 def main(infile = 'page.sql'):
     ''' Reads page.sql line by line and processes it '''
+    print 'making title <--> ID dictionaries...'
     crap = 'INSERT INTO `page` VALUES'
     t2id = {}
     for line in open(infile):
@@ -22,5 +23,4 @@ def main(infile = 'page.sql'):
     dump(id2t, open('ID-title_dict.pickle', 'w'), 2)
 
 if __name__ == "__main__":
-    print 'making title <--> ID dictionaries...'
     main()

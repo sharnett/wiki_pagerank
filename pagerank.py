@@ -27,6 +27,7 @@ def load_data():
     return A, d2s, i2t
 
 def top_k(k = 10, v = None):
+    ''' does all titles if k < 0 '''
     A, d2s, i2t = load_data()
     if v is None:
         print 'doing pagerank'
@@ -36,10 +37,15 @@ def top_k(k = 10, v = None):
     def get_title(x):
         ''' convert dense ID to sparse ID, then sparse ID to title '''
         i = d2s[x]
-        return i2t[i]
-        #return i2t[str(i)]
-    return [get_title(x) for x in islice(t, k)]
+        try:
+            return i2t[i]
+        except KeyError:
+            return 'TITLE_ERROR'
+    return (get_title(x) for x in islice(t, k)) if k >= 0 else (get_title(x) for x in t)
 
-if __name__ == '__main__':
+def main():
     for i, title in enumerate(top_k(), 1):
         print('%2d %s' % (i, title))
+
+if __name__ == '__main__':
+    main()

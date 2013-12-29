@@ -26,7 +26,10 @@ def create_matrix():
     data = [1]*len(I)
     return coo_matrix((data, (I,J)), shape=(n,n), dtype='i1')
 
-if __name__ == '__main__':
+def main():
     create_compact_dicts()
     A = create_matrix()
     savemat('A', {'A': A})
+
+if __name__ == '__main__':
+    main()
