@@ -1,5 +1,29 @@
-wiki_pagerank
-=============
+#wiki_pagerank
+
+This is a set of python scripts to run PageRank on the wikipedia link graph. 
+
+##Background by Luke Stanley
+
+Realising that often bandwidth is bad, I got excited about offline Wikipedia
+collections.  I decided to give the gift of knowledge for Christmas (as well as
+some bootable Ubuntu for some relatives with virus ridden XP boxes).
+
+But I was disappointed that a bunch of articles I thought were really important
+were missing from existing offline Wikipedia article collections. They were out
+of date, and the manual selections of articles people chose was too limited in
+my opinion.  It wasn't clear if this was just distasteful choices or willful
+censorship.
+
+I thought the PageRank algorithm could be a good way to filter less significant
+articles, and make my own article collection instead of a presumably messy
+human bureaucracy for choosing what articles make the cut.  I found Sean
+Harnett had calculated PageRank before on Wikipedia dataset here:
+http://www.columbia.edu/~srh2144/neatthings/ I asked him to upload his Python
+scripts for doing so, and he kindly obliged putting them here on Github:
+https://github.com/sharnett/wiki_pagerank
+
+They didn't require much work to get going with a smaller Wikipedia dataset, I
+wrote a few setup scripts for use on a single computer.
 
 ##Some results
 
@@ -7,34 +31,13 @@ wiki_pagerank
 * [full english results](https://ia601006.us.archive.org/27/items/en_wikipedia_article_titles_by_pagerank_dated_20131202.txt/en_wikipedia_article_titles_by_pagerank.txt) (209 MB file)
 * [top 100 tagalog](https://gist.github.com/sharnett/8089293)
 
-Sorting Wikipedia article dumps by PageRank
--------------------------------------
-
-Sean Harnett advises that you may want to try using Map Reduce on a
- cloud / distributed cluster to speed the creation of graph.txt for larger
- Wikipedia language versions, or just use a beefy computer and accept 
- it may take a while. But please test with a small Wikipedia first to
- ensure you have all the dependency like scipy.
-Also an Solid State Disk drive may help.
-
-I've adapted Sean's scripts so that all you should need to do is put 
-the decompressed pagelinks.sql and page.sql files into this folder as
-the working directory, then run test_getting_wikipedia_pageranks.sh
-
-To test it, as I'm visiting family my girlfriends family in the Philippines,
-I figured the Tagalog Wikipedia could be a good small test Wikipedia.
-As of December 2013, tlwiki-latest-pagelinks.sql decompresses to 95 MB,
-and tlwiki-latest-page.sql - the list of articles, expands to 16 MB.
-I have included a file to download and extract this.
-
-Example Usage
--------------------------------------
+##Example Usage
 
     sudo apt-get install python-scipy
     ./download_and_extract.sh
     python main.py
 
-This should take a couple minutes and get you something like this:
+This should take a minute or so and get you something like this:
 
     making title <--> ID dictionaries...
     building the graph...
@@ -61,29 +64,18 @@ This should take a couple minutes and get you something like this:
      9 GNU/Linux
     10 World_Wide_Web
 
+##Tips
 
--------------------------------------
-Background by Luke Stanley
+You may want to use MapReduce to speed the creation of graph.txt for
+larger Wikipedia language versions (the original motivation was an excuse to
+play with MapReduce). Included are the mapper and reducer scripts if you want
+to go that route. In any case, you should definitely test with a small
+Wikipedia first to ensure that things work properly.
 
-Realising that often bandwidth is bad, I got excited about offline
- Wikipedia collections.
-I decided to give the gift of knowledge for Christmas (as well as some
- bootable Ubuntu for some relatives with virus ridden XP boxes).
+Luke ended up needing to use a big EC2 instance to run it on the full English
+wikipedia as his laptop didn't have enough memory.
 
-But I was disappointed that a bunch of articles I thought were really
- important were missing from existing offline Wikipedia article collections.
- 
-They were out of date, and the manual selections of articles people 
-chose was too limited in my opinion.
-It wasn't clear if this was just distasteful choices or willful censorship.
-So I thought the PageRank algorithm could be a good way to filter less
- significant articles, and make my own article collection instead of a
-  presumably messy human bureaucracy for choosing what articles make the cut.
-I found Sean Harnett had calculated PageRank before on Wikipedia dataset here: 
-http://www.columbia.edu/~srh2144/neatthings/
-I asked him to upload his Python scripts for doing so, and he kindly obliged
- putting them here on Github:
-https://github.com/sharnett/wiki_pagerank
-
-They didn't require much work to get going with a smaller Wikipedia dataset,
-I wrote a few setup scripts for use on a single computer.
+The Tagalog Wikipedia is a good small test Wikipedia.  As of December 2013,
+tlwiki-latest-pagelinks.sql decompresses to 95 MB, and tlwiki-latest-page.sql --
+the list of articles -- expands to 16 MB.  Included is a file to download and
+extract these.
