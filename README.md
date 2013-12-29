@@ -31,37 +31,36 @@ Example Usage
 -------------------------------------
 
     sudo apt-get install python-scipy
-    ./download_and_extract_tagalog_wikipedia_dump.sh
-    ./test_getting_wikipedia_pageranks.sh
+    ./download_and_extract.sh
+    python main.py
 
 This should take a couple minutes and get you something like this:
 
-    loading conversion dictionary...
-    allocating matrix...
-    reading graph file...
-    loading A
+    making title <--> ID dictionaries...
+    building the graph...
+    compactifying...
+    reading graph file and matrixifying...
+    loading data...
     doing pagerank
-    i = 1 err = 1.001
-    i = 2 err = 0.0721206085496
-    i = 3 err = 0.0309899616446
-    i = 4 err = 0.0180857531626
-    i = 5 err = 0.00638996220934
-    i = 6 err = 0.0030262687189
-    i = 7 err = 0.00118320968906
-    i = 8 err = 0.000542479816184
-    loading denseID to sparseID dictionary
-    loading ID to title dictionary
+    i = 1 err = 0.0721205984186
+    i = 2 err = 0.0309899557399
+    i = 3 err = 0.0180857631125
+    i = 4 err = 0.00638996682224
+    i = 5 err = 0.00302626819411
+    i = 6 err = 0.00118320972815
+    i = 7 err = 0.000542479457445
     sorting
-    Wikipedia
-    Malayang_software
-    Wikang_Ingles
-    Malayang_sopwer
-    Hapon
-    Estados_Unidos
-    Pilipinas
-    Ensiklopedya
-    GNU/Linux
-    World_Wide_Web
+     1 Wikipedia
+     2 Malayang_software
+     3 Wikang_Ingles
+     4 Malayang_sopwer
+     5 Hapon
+     6 Estados_Unidos
+     7 Pilipinas
+     8 Ensiklopedya
+     9 GNU/Linux
+    10 World_Wide_Web
+
 
 -------------------------------------
 Background by Luke Stanley
