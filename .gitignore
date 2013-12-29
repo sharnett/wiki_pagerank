@@ -1,3 +1,14 @@
+page.sql
+pagelinks.sql
+tlwiki-latest-page.sql.gz
+tlwiki-latest-pagelinks.sql.gz
+graph.txt
+ID-title_dict.pickle
+title-ID_dict.pickle
+dense_to_sparse.pickle
+sparse_to_dense.pickle
+A.mat
+
 *.py[cod]
 
 # C extensions
