@@ -1,0 +1,69 @@
+Seems wikipedia download limits at 2.00 MB/s - downloading elsewhere could save money.
+E.g: BitTorrent, from a cheaper instance or VPS could be ideal.
+
+Used r3.2xlarge in June 2015, us-east-1c
+
+
+20:29 2 hrs 56 mins uptime
+
+17.38 all setup and started download
+18.28 done downloading
+18:35 done making title <--> ID dicts and started building graph
+19:05 4% compactified
+19:14 50% 
+19:18 75%
+19:25 compactified. reading graph file and matrixifying..
+19:39 36% matrixified
+19:48 60%
+19:55 83%
+20:00 98%
+20:06 saved compactified matrix. and loaded into pagerank.py
+20:07 doing pagerank
+20:09 done pr, saved and sorting
+20:10 sorted. getting titles and outputing file
+20:26 9.7GiB of pageranked.txt output
+20:27 10 GiB
+20:28 10.4 GiB
+20:36 14 GiB
+~20:42 done and compressed
+
+3.1~ hours *  $0.700 per Hour for r3.2xlarge
+= ~$2.17
+
+
+
+ncdu output something like this shortly before system shutdown:                                                                                    
+--- /home/ubuntu/wiki_pagerank -----------------------------------------------------------------------------------------------------------------------
+                        /..                                                                                                                           
+   28.8GiB [##########]  pagelinks.sql
+   14.1GiB [####      ]  pageranked.txt
+   11.7GiB [####      ]  graph.txt
+    6.8GiB [##        ]  pr.out.npy
+    4.3GiB [#         ]  enwiki-latest-pagelinks.sql.gz
+    4.2GiB [#         ]  dense_to_sparse.pickle
+    4.0GiB [#         ]  A.npy
+    3.7GiB [#         ]  page.sql
+    2.5GiB [          ]  pageranked.txt.gz
+    1.2GiB [          ]  enwiki-latest-page.sql.gz
+  355.7MiB [          ]  title-ID_dict.pickle
+  355.7MiB [          ]  ID-title_dict.pickle
+  325.5MiB [          ]  sparse_to_dense.pickle
+  216.0KiB [          ] /.git
+   68.0KiB [          ]  tagalog inlink and outlink distributions.ipynb
+    4.0KiB [          ]  README.md
+    4.0KiB [          ]  pagerank.pyc
+    4.0KiB [          ]  compactify.pyc
+    4.0KiB [          ]  make_graph.pyc
+    4.0KiB [          ]  pagerank.py
+    4.0KiB [          ]  make_graph.py
+    4.0KiB [          ]  make_graph_mapper.py
+    4.0KiB [          ]  make_title_ID_dicts.pyc
+    4.0KiB [          ]  compactify.py
+    4.0KiB [          ]  make_title_ID_dicts.py
+    4.0KiB [          ]  main.py
+    4.0KiB [          ]  make_graph_reducer.py
+    4.0KiB [          ]  .gitignore
+    4.0KiB [          ]  download_and_extract.sh
+    4.0KiB [          ]  setup.sh
+    
+See aws_stats.png for CPU, network and disk usage

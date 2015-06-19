@@ -8,6 +8,7 @@ sudo apt-get -y install git python-numpy build-essential cython python-scipy hto
 git clone https://github.com/lukestanley/wiki_pagerank
 cd wiki_pagerank/
 echo "You may want to setup an alert trigger for when this instance has shut down"
+echo "See aws_stats.png for CPU, network and disk usage"
 wget -c http://dumps.wikimedia.org/enwiki/latest/enwiki-latest-page.sql.gz
 pigz -dc *page.sql.gz > page.sql
 echo "Extracted page.sql"
