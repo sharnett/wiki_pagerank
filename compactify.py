@@ -43,8 +43,10 @@ def create_matrix():
 def main():
     create_compact_dicts()
     A = create_matrix()
+    print 'saving compactified matrix'
     f = open('A.npy','w')
     savez(f,row=A.row,col=A.col,data=A.data,shape=A.shape)
+    print 'saved'
 
 if __name__ == '__main__':
     main()
