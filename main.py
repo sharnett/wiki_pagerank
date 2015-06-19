@@ -18,8 +18,11 @@ def actual(outfile='pageranked.txt'):
     make_graph.main()
     compactify.main()
     with open(outfile, 'w') as f:
-        for page in pagerank.top_k(-1):
+        pr_results = pagerank.top_k(-1)
+        print 'saving PR results'
+        for page in pr_results:
             f.write(page + '\n')
+        print 'done saving!'
 
 if __name__ == '__main__':
     test() if len(argv) == 1 else actual()
