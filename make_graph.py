@@ -7,7 +7,7 @@ def process_line(line, d, outfile):
     Prints outlinks for each page.
 
     Example contents of line: 
-    ...'),(12,0,'A._S._Neill'),(12,0,'AK_Press'),(12,0,...
+    ...',5),(12,0,'A._S._Neill',3),(12,0,'AK_Press',4),(12,0,...
 
     Each tuple is of the form ('from' page, namespace, 'to' page).  Print a
     line for each 'from' page with the outlinks that are in namespace 0 (the
@@ -15,10 +15,10 @@ def process_line(line, d, outfile):
     are given by ID and the 'to' pages by name. Use the dictionary d to map the
     text names to IDs for consistency (and some space savings).  
     '''
-    pattern = "\((\d+),(\d+),'(.*?)'\)[,;]"
+    pattern = "\((\d+),(\d+),'(.*?)',(\d+)\)[,;]"
     current_page = None
     for match in finditer(pattern, line):
-        from_page, namespace, to_page = match.groups()
+        from_page, namespace, to_page, from_ns = match.groups()
         if from_page != current_page: 
             if current_page: outfile.write('\n') # new line for all but the first
             outfile.write(from_page + ' ')
