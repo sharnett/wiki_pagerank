@@ -7,10 +7,15 @@ sudo apt-get update
 sudo apt-get -y install git python-numpy build-essential cython python-scipy htop ncdu python-h5py pigz
 git clone https://github.com/lukestanley/wiki_pagerank
 cd wiki_pagerank/
+echo "You may want to setup an alert trigger for when this instance has shut down"
 wget -c http://dumps.wikimedia.org/enwiki/latest/enwiki-latest-page.sql.gz
 pigz -dc *page.sql.gz > page.sql
+echo "Extracted page.sql"
 wget -c http://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pagelinks.sql.gz
 pigz -dc *pagelinks.sql.gz > pagelinks.sql
+echo "Extracted pagelinks.sql"
 python main.py .
+echo "Compressing"
 pigz --best -k pageranked.txt
+echo "Done, shutting down"
 sudo shutdown now
