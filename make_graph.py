@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from re import finditer
 from cPickle import load
+from os import system as run
 
 def process_line(line, d, outfile):
     ''' 
@@ -37,6 +38,8 @@ def main():
         for line in open('pagelinks.sql'):
             if line[:len(crap)] == crap: 
                 process_line(line, d, outfile)
+    
+    run('wc -l graph.txt > graph.txt.wc')
 
 if __name__ == "__main__":
     main()

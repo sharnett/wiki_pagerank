@@ -4,20 +4,24 @@ from scipy.io import savemat
 from scipy.sparse import coo_matrix
 from numpy import savez
 
+
+
 def create_compact_dicts():
     print 'compactifying...'
     sparse_to_dense, dense_to_sparse = {}, []
+    graphLineCount = int(open('graph.txt.wc').read().strip().split(' ')[0])
     for i, line in enumerate(open('graph.txt')):
         ID = int(line.split()[0])
         sparse_to_dense[ID] = i
         dense_to_sparse.append(ID)
         if (i % 10000000 == 0):
             print i
-            print(i/909260013)
+            print(i/graphLineCount)
     dump(sparse_to_dense, open('sparse_to_dense.pickle', 'w'), 2)
     dump(dense_to_sparse, open('dense_to_sparse.pickle', 'w'), 2)
 
 def create_matrix():
+    graphLineCount = int(open('graph.txt.wc').read().strip().split(' ')[0])
     sparse_to_dense = load(open('sparse_to_dense.pickle'))
     print 'reading graph file and matrixifying...'
     I, J = [], []
@@ -25,7 +29,7 @@ def create_matrix():
     for line in open('graph.txt'):
         if (lineN % 10000000 == 0):
             print lineN
-            print(lineN/909260013)
+            print(lineN/graphLineCount)
         lineN = lineN + 1
         converted = [sparse_to_dense.get(int(ID), -1) for ID in line.split()]
         converted = [x for x in converted if x>=0]
