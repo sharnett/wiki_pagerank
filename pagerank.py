@@ -1,5 +1,5 @@
 from __future__ import print_function 
-import os.path
+from os.path import isfile
 from scipy.io import loadmat
 from cPickle import load, dump
 from numpy.linalg import norm
@@ -41,16 +41,11 @@ def top_k(k=10, v=None):
     A, d2s, i2t = load_data()
     print('data loaded and being read by top_k')
     if v is None:
-        if os.path.isfile('pr.out.npy'): 
-            print('loading existing pagerank computation...', end=' ')
-            v = nload('pr.out.npy')
-            print('loaded')
-        else:
-            print('doing pagerank...')
-            v = pagerank(A)
-            print('done computing pagerank, saving...', end=' ')
-            nsave('pr.out.npy', v)
-            print('saved')
+        print('doing pagerank...')
+        v = pagerank(A)
+        print('done computing pagerank, saving...', end=' ')
+        nsave('pr.out.npy', v)
+        print('saved')
     print('sorting...')
     t = reversed(argsort(array(v)[:, 0]))  # pageranked list of dense IDs
 
@@ -65,7 +60,12 @@ def top_k(k=10, v=None):
     return (get_title(x) for x in islice(t, k)) if k >= 0 else (get_title(x) for x in t)
 
 def main():
-    for i, title in enumerate(top_k(), 1):
+    v = None
+    if isfile('pr.out.npy'):
+        print('loading existing pagerank computation from pr.out.npy...', end=' ')
+        v = nload('pr.out.npy')
+        print('loaded')
+    for i, title in enumerate(top_k(v=v), 1):
         print('%2d %s' % (i, title))
 
 if __name__ == '__main__':
