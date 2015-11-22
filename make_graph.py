@@ -3,6 +3,7 @@ from re import finditer
 from cPickle import load
 from os import system as run
 
+
 def process_line(line, d, outfile):
     ''' 
     Prints outlinks for each page.
@@ -29,17 +30,16 @@ def process_line(line, d, outfile):
 def main():
     ''' Reads pagelinks.sql line by line and processes it. Needs the pickled 
     dictionary mapping page names to IDs '''
-    print "building the graph..."
+    print('building the graph...')
     crap = 'INSERT INTO `pagelinks` VALUES'
-    path = ''#set if needed (different current dir)
+    path = ''  # set if needed (different current dir)
     pickle = 'title-ID_dict.pickle'
     d = load(open(path+pickle))
     with open('graph.txt', 'w') as outfile:
         for line in open('pagelinks.sql'):
             if line[:len(crap)] == crap: 
                 process_line(line, d, outfile)
-    
     run('wc -l graph.txt > graph.txt.wc')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
