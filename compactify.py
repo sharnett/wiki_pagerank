@@ -7,25 +7,25 @@ from numpy import savez
 
 def create_compact_dicts():
     print('compactifying...')
+    num_pages = int(open('graph.txt.wc').read())
     sparse_to_dense, dense_to_sparse = {}, []
-    graphLineCount = int(open('graph.txt.wc').read().strip().split(' ')[0])
     for i, line in enumerate(open('graph.txt')):
         ID = int(line.split()[0])
         sparse_to_dense[ID] = i
         dense_to_sparse.append(ID)
-        if (i % 10000000 == 0):
-            print('i = %d percent done = %.3f' % (i, i/graphLineCount))
+        if i % 10000000 == 0:
+            print('i = %d percent done = %.3f' % (i, i/num_pages))
     dump(sparse_to_dense, open('sparse_to_dense.pickle', 'w'), 2)
     dump(dense_to_sparse, open('dense_to_sparse.pickle', 'w'), 2)
 
 def create_matrix():
-    graphLineCount = int(open('graph.txt.wc').read().strip().split(' ')[0])
+    num_pages = int(open('graph.txt.wc').read())
     sparse_to_dense = load(open('sparse_to_dense.pickle'))
     print('reading graph file and matrixifying...')
     I, J = [], []
     for i, line in enumerate(open('graph.txt')):
-        if (i % 10000000 == 0):
-            print('i = %d percent done = %.3f' % (i, i/graphLineCount))
+        if i % 10000000 == 0:
+            print('i = %d percent done = %.3f' % (i, i/num_pages))
         converted = [sparse_to_dense.get(int(ID), -1) for ID in line.split()]
         converted = [x for x in converted if x>=0]
         i = converted[0]

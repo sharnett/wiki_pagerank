@@ -1,7 +1,6 @@
 #!/usr/bin/python
 from re import finditer
 from cPickle import load
-from os import system as run
 
 
 def process_line(line, d, outfile):
@@ -19,13 +18,18 @@ def process_line(line, d, outfile):
     '''
     pattern = "\((\d+),(\d+),'(.*?)',(\d+)\)[,;]"
     current_page = None
+    num_pages = 0
     for match in finditer(pattern, line):
         from_page, namespace, to_page, from_ns = match.groups()
         if from_page != current_page: 
-            if current_page: outfile.write('\n') # new line for all but the first
+            if current_page:
+                outfile.write('\n') # new line for all but the first
+                num_pages += 1
             outfile.write(from_page + ' ')
             current_page = from_page
-        if namespace == '0' and to_page in d: outfile.write(str(d[to_page]) + ' ')
+        if namespace == '0' and to_page in d:
+            outfile.write(str(d[to_page]) + ' ')
+    return num_pages
 
 def main():
     ''' Reads pagelinks.sql line by line and processes it. Needs the pickled 
@@ -35,11 +39,13 @@ def main():
     path = ''  # set if needed (different current dir)
     pickle = 'title-ID_dict.pickle'
     d = load(open(path+pickle))
+    num_pages = 0
     with open('graph.txt', 'w') as outfile:
         for line in open('pagelinks.sql'):
             if line[:len(crap)] == crap: 
-                process_line(line, d, outfile)
-    run('wc -l graph.txt > graph.txt.wc')
+                num_pages += process_line(line, d, outfile)
+    with open('graph.txt.wc', 'w') as outfile:
+        outfile.write('%d\n' % num_pages)
 
 if __name__ == '__main__':
     main()
