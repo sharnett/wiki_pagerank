@@ -12,7 +12,7 @@ def test():
     compactify.main()
     pagerank.main()
 
-def actual(outfile='pageranked.txt'):
+def actual(outfile='data/pageranked.txt'):
     ''' does everything and writes all results to file '''
     make_title_ID_dicts.main()
     make_graph.main()

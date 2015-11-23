@@ -36,15 +36,13 @@ def main():
     dictionary mapping page names to IDs '''
     print('building the graph...')
     crap = 'INSERT INTO `pagelinks` VALUES'
-    path = ''  # set if needed (different current dir)
-    pickle = 'title-ID_dict.pickle'
-    d = load(open(path+pickle))
+    d = load(open('data/title-ID_dict.pickle'))
     num_pages = 0
-    with open('graph.txt', 'w') as outfile:
-        for line in open('pagelinks.sql'):
+    with open('data/graph.txt', 'w') as outfile:
+        for line in open('data/pagelinks.sql'):
             if line[:len(crap)] == crap: 
                 num_pages += process_line(line, d, outfile)
-    with open('graph.txt.wc', 'w') as outfile:
+    with open('data/graph.txt.wc', 'w') as outfile:
         outfile.write('%d\n' % num_pages)
 
 if __name__ == '__main__':

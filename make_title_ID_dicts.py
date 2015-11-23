@@ -10,7 +10,7 @@ def process_line(line, d):
         if namespace == '0': 
             d[name] = int(ID)
 
-def main(infile = 'page.sql'):
+def main(infile='data/page.sql'):
     ''' Reads page.sql line by line and processes it '''
     print 'making title <--> ID dictionaries...'
     crap = 'INSERT INTO `page` VALUES'
@@ -19,8 +19,8 @@ def main(infile = 'page.sql'):
         if line[:len(crap)] == crap: 
             process_line(line, t2id)
     id2t = {v:k for k, v in t2id.iteritems()}
-    dump(t2id, open('title-ID_dict.pickle', 'w'), 2)
-    dump(id2t, open('ID-title_dict.pickle', 'w'), 2)
+    dump(t2id, open('data/title-ID_dict.pickle', 'w'), 2)
+    dump(id2t, open('data/ID-title_dict.pickle', 'w'), 2)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
