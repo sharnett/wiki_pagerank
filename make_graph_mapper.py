@@ -31,9 +31,8 @@ def main():
     enwiki-YYYYMMDD-pagelinks.sql file. Needs the pickled dictionary mapping
     page names to IDs '''
     crap = 'INSERT INTO `pagelinks` VALUES'
-    path = ''#set if needed (different current dir)
-    pickle = 'title-ID_dict.pickle'
-    d = load(open(path+pickle))
+    pickle = 'data/title-ID_dict.pkl'
+    d = load(open(pickle))
     for line in stdin:
         if line[:len(crap)] == crap: 
             process_line(line, d)

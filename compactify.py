@@ -15,12 +15,12 @@ def create_compact_dicts():
         dense_to_sparse.append(ID)
         if i % 10000000 == 0:
             print('i = %d percent done = %.3f' % (i, i/num_pages))
-    dump(sparse_to_dense, open('data/sparse_to_dense.pickle', 'w'), 2)
-    dump(dense_to_sparse, open('data/dense_to_sparse.pickle', 'w'), 2)
+    dump(sparse_to_dense, open('data/sparse_to_dense.pkl', 'w'), 2)
+    dump(dense_to_sparse, open('data/dense_to_sparse.pkl', 'w'), 2)
 
 def create_matrix():
     num_pages = int(open('data/graph.txt.wc').read())
-    sparse_to_dense = load(open('data/sparse_to_dense.pickle'))
+    sparse_to_dense = load(open('data/sparse_to_dense.pkl'))
     print('reading graph file and matrixifying...')
     I, J = [], []
     for i, line in enumerate(open('data/graph.txt')):

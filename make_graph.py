@@ -36,7 +36,7 @@ def main():
     dictionary mapping page names to IDs '''
     print('building the graph...')
     crap = 'INSERT INTO `pagelinks` VALUES'
-    d = load(open('data/title-ID_dict.pickle'))
+    d = load(open('data/title-ID_dict.pkl'))
     num_pages = 0
     with open('data/graph.txt', 'w') as outfile:
         for line in open('data/pagelinks.sql'):

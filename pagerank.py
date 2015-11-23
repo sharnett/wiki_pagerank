@@ -28,10 +28,10 @@ def load_data():
     print('loaded A.npy')
     A = coo_matrix((y['data'],(y['row'],y['col'])),shape=y['shape'])
     print('created coo_matrix')
-    d2s = load(open('data/dense_to_sparse.pickle'))
-    print('loaded dense_to_sparse.pickle')
-    i2t = load(open('data/ID-title_dict.pickle'))
-    print('loaded ID-title_dict.pickle')
+    d2s = load(open('data/dense_to_sparse.pkl'))
+    print('loaded dense_to_sparse.pkl')
+    i2t = load(open('data/ID-title_dict.pkl'))
+    print('loaded ID-title_dict.pkl')
     return A, d2s, i2t
 
 def top_k(k=10, v=None):
